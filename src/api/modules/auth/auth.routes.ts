@@ -12,5 +12,6 @@ router.post(
     catchAsync(controller.generateOTP)
 );
 router.post("/login", validate(loginRequestSchema), catchAsync(controller.login));
+router.post("/logout", catchAsync(controller.logout));
 
 export default router;
