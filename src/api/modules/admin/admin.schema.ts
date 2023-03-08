@@ -7,7 +7,7 @@ export interface IAdminCore {
 
 export interface IAdmin extends IAdminCore {
     password: string;
-    token: string;
+    token?: string;
 }
 
 export const createAdminRequestSchema = z

@@ -5,6 +5,10 @@ import AuthModel from "./auth.model";
 import { IAuth } from "./auth.schema";
 import sendEmail from "../../services/email";
 
+function alertAdmin(email: string) {
+    // TODO : send an email alerting the admin
+}
+
 async function getOTPFromDB(username: string): Promise<IAuth> {
     const otp = await AuthModel.findOne({ username });
     if (!otp) throw new AppError(403, "Invalid OTP");
@@ -39,6 +43,7 @@ async function verifyOTP(username: string, otp: number): Promise<boolean> {
     const otpFromDB = await getOTPFromDB(username);
     if (!otpFromDB) throw new AppError(403, "Invalid OTP");
     if (otpFromDB.otp !== otp) {
+        alertAdmin(otpFromDB.email);
         await deleteOTPFromDB(username);
         return false;
     }

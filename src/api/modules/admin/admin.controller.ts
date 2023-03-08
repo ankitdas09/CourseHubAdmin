@@ -1,12 +1,13 @@
 import { Request, Response, NextFunction } from "express";
-import { ICreateAdminRequest } from "./admin.schema";
+import { IAdmin, ICreateAdminRequest } from "./admin.schema";
 import services from "./admin.service";
 
 async function getAdminDetails(req: Request, res: Response, next: NextFunction) {
+    const user: IAdmin = req.user;
+
     return res.json({
-        _id: "789yiuhwjkdq879h",
-        name: "Test admin",
-        email: "test@admin.com",
+        username: user.name,
+        email: user.email,
     });
 }
 

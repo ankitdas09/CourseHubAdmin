@@ -14,12 +14,12 @@ export function generateJWT(id: string): string {
     return token;
 }
 
-export function verifyJWT(token: string): boolean | string | jwt.JwtPayload {
+export function verifyJWT(token: string) {
     if (!token) return false;
     if (!secret) return false;
     try {
         let decoded = jwt.verify(token, secret);
-        return decoded;
+        return <any>decoded;
     } catch (error) {
         return false;
     }
